@@ -1,17 +1,18 @@
 //Varabiles and consts
-const widthInput = document.getElementById("width");
-const lengthInput = document.getElementById("length");
-const scaleInput = document.getElementById("scale");
-const room = document.getElementById("room");
-const box = document.getElementById("box");
-const roomOutlets = document.getElementById("roomOutlets");
-const outletEdit = document.getElementById("outletEdit");
-const outletInfo = document.getElementById("outletInfo");
-let roomWidth = 1000;
-let roomHeight = 500;
-let items = [[]];
-let outletSelected = 0;
-let scale = 1;
+const widthInput = document.getElementById("width"),
+lengthInput = document.getElementById("length"),
+scaleInput = document.getElementById("scale"),
+room = document.getElementById("room"),
+box = document.getElementById("box"),
+roomOutlets = document.getElementById("roomOutlets"),
+outletEdit = document.getElementById("outletEdit"),
+outletInfo = document.getElementById("outletInfo");
+
+let roomWidth = 1000,
+roomHeight = 500,
+items = [[]],
+outletSelected = 0,
+scale = 1;
 //Room
 
 const createRoom = () => { //Create room
