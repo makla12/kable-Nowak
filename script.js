@@ -1,5 +1,3 @@
-document.cookie = "name:John";
-console.log(document.cookie);
 //Varabiles and consts
 const widthInput = document.getElementById("width");
 const lengthInput = document.getElementById("length");
