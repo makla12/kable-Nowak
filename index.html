@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="bootstrap.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Program do liczenia przewodów</title>
+</head>
+<body>
+    <div style="width: auto; padding: 20px;">
+        <!--Pomieszczenie-->
+        <div class="create">
+            <h3 style="margin-top: 0;">Pomieszczenie</h3>
+            <label class="form-label">Podaj szerokość pomieszczenia(m):</label><input class="form-control" type="number" id="width" min="0" step="0.1">
+            <label class="form-label">Podaj długość pomieszczenia(m):</label><input class="form-control" type="number" id="length" min="0" step="0.1">
+            <p>Aktualne wymiary pomieszczenia:<b id="roomDim">10m x 5m</b></p>
+            <button onclick="createRoom()" class="btn btn-primary">Stwórz pomieszczenie</button>
+            <h3 style="margin-top: 30px;">Skala</h3>
+            <label class="form-label">Podaj skalę(x px = 1 cm):</label><input class="form-control" type="number" id="scale" min="0" step="0.1">
+            <p>Aktualna skala pomieszczenia:<b><span id="scaleText">1</span>px = 1cm</b></p>
+            <button onclick="updateScale()" class="btn btn-primary">Zastosuj skalę</button>
+            
+        </div>
+
+        <!--Gniazdka-->
+        <div class="create" style="display: flex; flex-wrap: wrap;">
+            <h3 style="margin-right: 20px;">Edytowanie gniazdek</h3>
+            <button onclick="createOutlet()" class="btn btn-success" style="font-size: large;margin-right: 20px;">+</button><button id="deleteBtn" onclick="deleteOutlet()" class="btn btn-danger" style="font-size: large;display: none;">-</button>
+            <b id="outletEditInfo" style="margin-top: 30px;">Stwórz gniazdko albo je kliknij aby je wybrać</b>
+
+            <div id="outletEdit" style="margin-top: 30px; display: none;">
+                <h3 id="outletEditName">Gniazdko 1</h3>
+                <label class="form-label" >Wybierz ścianę:</label>
+                <select class="form-select" id="outletI">
+                    <option value="0">Górna</option>
+                    <option value="1">Prawa</option>
+                    <option value="2">Dolna</option>
+                    <option value="3">Lewa</option>
+                </select>
+
+                <label class="form-label" id="outletI2L">Odległość od lewej ściany(m):</label><input class="form-control" type="number" id="outletI2">
+
+                <label class="form-label">Wysokość nad ziemią(m):</label><input class="form-control" type="number" min="0" step="0.1" id="outletI3">
+
+                <label class="form-label">Nazwa:</label><input class="form-control" type="text" id="outletI4">
+                <br>
+                <button class="btn btn-primary" onclick="updateOutlet()">Zastosuj zmiany</button>
+            </div>
+
+        </div>
+
+        <!--Skrzynka-->
+        <div class="create">
+            <h3>Skrzynka</h3>
+            <label class="form-label">Szerokość(m):</label><input class="form-control" type="number" min="0" step="0.1" id="BoxWidth">
+            <label class="form-label">Długość(m):</label><input class="form-control" type="number" min="0" step="0.1" id="BoxLength">
+            <label class="form-label">Odległość od lewej ściany(m):</label><input class="form-control" type="number" min="0" step="0.1" id="BoxX">
+            <label class="form-label">Odległość od górnej ściany(m):</label><input class="form-control" type="number" min="0" step="0.1" id="BoxY">
+            <label class="form-label">Wysokość nad ziemią(m):</label><input class="form-control" type="number" min="0" step="0.1" id="BoxH">
+            <br>
+            <button onclick="createBox()" class="btn btn-primary">Stwórz skrzynkę</button>
+        </div>
+
+        <div class="create">
+            <h4>Suma dystansu przewodów:<b id="calculateCableOut"></b></h4>
+        </div>
+
+        <div id="room">
+            <div id="box"></div>
+            <div id="roomOutlets">
+
+            </div>
+            <div id="outletInfo">
+                <p>Nazwa:<b id="outletInfo1"></b></p>
+                <p>Odległość od skrzynki:<b id="outletInfo2"></b></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

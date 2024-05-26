@@ -1,0 +1,57 @@
+body{
+    margin: 0;
+    font-family:Arial, Helvetica, sans-serif;
+}
+.create{
+    width: 550px; 
+    margin-bottom: 25px;
+    border: 3px solid black;
+    padding:2% 2% 2% 2%;
+    border-radius: 2rem;
+}
+#calculateCable{
+    width: 450px;
+    border: 3px solid black;
+    padding:2% 2% 2% 2%;
+    border-radius: 2rem;
+}
+#room{
+    width: 1004px;
+    height: 504px; 
+    border: 2px solid black;
+    position: absolute;
+    top: 20px;
+    left: 650px;
+}
+#box{
+    width: 40px;
+    height: 20px;
+    background-color: blue;
+    position: absolute;
+    display: none;
+}
+.outlet{
+    width: 20px;
+    height: 20px;
+    top: -10px;
+    left: -10px;
+    background-color:red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    position: absolute;
+}
+
+#outletInfo{
+    width: 250px;
+    height: 100px;
+    border-radius: 2rem;
+    top: 200px;
+    left: 90px;
+    background-color:darkblue;
+    padding: 1rem;
+    color: white;
+    position: absolute;
+    display: none;
+}
