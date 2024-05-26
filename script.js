@@ -6,7 +6,12 @@ room = document.getElementById("room"),
 box = document.getElementById("box"),
 roomOutlets = document.getElementById("roomOutlets"),
 outletEdit = document.getElementById("outletEdit"),
-outletInfo = document.getElementById("outletInfo");
+outletInfo = document.getElementById("outletInfo"),
+savedRoomsList = document.getElementById("savedRooms"),
+createRoomAlert = document.getElementById("roomCreateAlert"),
+roomSaveAlert = document.getElementById("roomSaveAlert"),
+roomSaveDeleteAllAlert = document.getElementById("roomSaveDeleteAllAlert"),
+roomSaveDeleteAlert = document.getElementById("roomSaveDeleteAlert");
 
 let roomWidth = 1000,
 roomHeight = 500,
@@ -16,6 +21,7 @@ scale = 1;
 //Room
 
 const createRoom = () => { //Create room
+    createRoomAlert.style.display='none';
     if(widthInput.value <= 0 || lengthInput.value <= 0){
         alert("Zostały wprowadzone złe dane");
         return 0;
@@ -34,12 +40,12 @@ const createRoom = () => { //Create room
     document.getElementById("calculateCableOut").innerHTML = "";
 };
 
-const updateScale = () => {
-    if(scaleInput.value <= 0){
+const updateScale = (x) => {
+    if(x <= 0){
         alert("Zostały wprowadzone złe dane");
         return 0;
     }
-    scale = scaleInput.value;
+    scale = x;
     room.style.width = roomWidth * scale + 4 + "px";
     room.style.height = roomHeight * scale + 4 + "px";
     document.getElementById("scaleText").innerHTML = scale;
@@ -388,3 +394,78 @@ const calculateCable = () => {
     
     document.getElementById("calculateCableOut").innerHTML = cable/100 + "m";
 };
+
+//Saving room data
+
+const setCookie = (cname, cvalue, exdays) => {
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+const removeCookie = cname => {
+    document.cookie = `${cname}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`
+}
+const romoveAllCokies = () => {
+    let cookieList = document.cookie.split(";");
+    for(let i of cookieList){
+        removeCookie(i.trim().split("=")[0]);
+    }
+}
+
+const saveRoom = (x) => {
+    let saveData = [roomWidth,roomHeight,items[0].length != 0,items];
+    setCookie(x,saveData,365);
+}
+
+const roomLoadList = () => {
+    if(document.cookie != ''){
+        let cookieList = document.cookie.split(";");
+        savedRoomsList.innerHTML = "";
+        let roomName;
+        for(let i of cookieList){
+            roomName = i.trim().split("=")[0];
+            savedRoomsList.innerHTML += `
+            <div style="display: flex;">
+                <h3 style="margin: 0 20px 0 0;">${roomName}</h3>
+                <button onclick="" class="btn btn-success" style="font-size: large;margin-right: 20px;">Wczytaj pokój</button>
+                <button onclick="" class="btn btn-danger" style="font-size: large;">Usuń pokój</button>
+            </div>`;
+        }
+    }
+}
+const loadRoom = (roomName) => {
+    let cookieList = document.cookie.split(";");
+    let loadData, cookie;
+    for(let i of cookieList){
+        cookie = i.trim().split("=");
+        if(cookie[0] == roomName){
+            loadData = cookie[1];
+            break; 
+        }
+    }
+    loadData = loadData.split(",");
+    
+    roomWidth = loadData[0];
+    roomHeight = loadData[1];
+
+    items = [];
+    if(loadData[2] == "true"){
+        box.style.display = "block";
+        items.push(loadData.splice(3,6));
+    }
+    else{
+        box.style.display = "none";
+        items.push([]);
+        loadData.splice(3,1);
+    }
+
+    while(loadData.length != 3){
+        items.push(loadData.splice(3,4));
+    }
+    updateScale(1);
+}
+
+
+
+roomLoadList();

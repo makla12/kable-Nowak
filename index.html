@@ -15,12 +15,11 @@
             <label class="form-label">Podaj szerokość pomieszczenia(m):</label><input class="form-control" type="number" id="width" min="0" step="0.1">
             <label class="form-label">Podaj długość pomieszczenia(m):</label><input class="form-control" type="number" id="length" min="0" step="0.1">
             <p>Aktualne wymiary pomieszczenia:<b id="roomDim">10m x 5m</b></p>
-            <button onclick="createRoom()" class="btn btn-primary">Stwórz pomieszczenie</button>
+            <button onclick="createRoomAlert.style.display='flex'" class="btn btn-primary">Stwórz pomieszczenie</button>
             <h3 style="margin-top: 30px;">Skala</h3>
             <label class="form-label">Podaj skalę(x px = 1 cm):</label><input class="form-control" type="number" id="scale" min="0" step="0.1">
             <p>Aktualna skala pomieszczenia:<b><span id="scaleText">1</span>px = 1cm</b></p>
-            <button onclick="updateScale()" class="btn btn-primary">Zastosuj skalę</button>
-            
+            <button onclick="updateScale(scaleInput.value)" class="btn btn-primary">Zastosuj skalę</button>
         </div>
 
         <!--Gniazdka-->
@@ -66,6 +65,15 @@
             <h4>Suma dystansu przewodów:<b id="calculateCableOut"></b></h4>
         </div>
 
+        <div class="create">
+            <h3>Zapisz lub wczytaj pokój</h3>
+            <button onclick="roomSaveAlert.style.display='flex'" class="btn btn-success" style="font-size: large;margin-right: 20px;">Zapisz pokój</button>
+            <button onclick="roomSaveDeleteAllAlert.style.display='flex'" class="btn btn-danger" style="font-size: large;">Usuń wszystkie pokoje</button>
+            <div id="savedRooms" style="padding: 20px;display: flex; flex-wrap: wrap; gap: 20px;">
+                
+            </div>
+        </div>
+
         <div id="room">
             <div id="box"></div>
             <div id="roomOutlets">
@@ -74,6 +82,46 @@
             <div id="outletInfo">
                 <p>Nazwa:<b id="outletInfo1"></b></p>
                 <p>Odległość od skrzynki:<b id="outletInfo2"></b></p>
+            </div>
+        </div>
+
+        <div id="roomCreateAlert" class="alert" style="display: none;">
+            <div class="alertDiv">
+                <h4>Czy jesteś pewny że chcesz sworzyć nowy pokój</h4>
+                <div style="display: flex;gap: 5vw;">
+                    <button onclick="createRoom()" class="btn btn-success">Stwórz</button>
+                    <button onclick="createRoomAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="roomSaveAlert" class="alert" style="display: none;">
+            <div class="alertDiv">
+                <label class="form-label" style="font-size: xx-large;">Nazwa pokoju do zapisania:</label><input class="form-control" type="text" id="">
+                <div style="display: flex;gap: 5vw;">
+                    <button onclick="" class="btn btn-primary">Zapisz pokój</button>
+                    <button onclick="roomSaveAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="roomSaveDeleteAllAlert" class="alert" style="display: none;">
+            <div class="alertDiv">
+                <h4>Czy jesteś pewny że chcesz usunąć wszystkie zapisane pokoje</h4>
+                <div style="display: flex;gap: 5vw;">
+                    <button onclick="romoveAllCokies()" class="btn btn-success">Usuń</button>
+                    <button onclick="roomSaveDeleteAllAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="roomSaveDeleteAlert" class="alert" style="display: none;">
+            <div class="alertDiv">
+                <h4>Czy jesteś pewny że chcesz usunąć pokój o nazwie xxxxxxxx</h4>
+                <div style="display: flex;gap: 5vw;">
+                    <button onclick="romoveCokie('nazwa-pokoju')" class="btn btn-success">Usuń</button>
+                    <button onclick="roomSaveDeleteAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                </div>
             </div>
         </div>
     </div>
