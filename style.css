@@ -19,7 +19,7 @@ body{
     width: 1004px;
     height: 504px; 
     border: 2px solid black;
-    position: absolute;
+    position: fixed;
     top: 20px;
     left: 650px;
 }

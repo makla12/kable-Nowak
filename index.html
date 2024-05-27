@@ -68,7 +68,7 @@
         <div class="create">
             <h3>Zapisz lub wczytaj pokój</h3>
             <button onclick="roomSaveAlert.style.display='flex'" class="btn btn-success" style="font-size: large;margin-right: 20px;">Zapisz pokój</button>
-            <button onclick="roomSaveDeleteAllAlert.style.display='flex'" class="btn btn-danger" style="font-size: large;">Usuń wszystkie pokoje</button>
+            <button onclick="roomDeleteAllAlert.style.display='flex'" class="btn btn-danger" style="font-size: large;">Usuń wszystkie pokoje</button>
             <div id="savedRooms" style="padding: 20px;display: flex; flex-wrap: wrap; gap: 20px;">
                 
             </div>
@@ -84,47 +84,59 @@
                 <p>Odległość od skrzynki:<b id="outletInfo2"></b></p>
             </div>
         </div>
+    </div>
 
-        <div id="roomCreateAlert" class="alert" style="display: none;">
-            <div class="alertDiv">
-                <h4>Czy jesteś pewny że chcesz sworzyć nowy pokój</h4>
-                <div style="display: flex;gap: 5vw;">
-                    <button onclick="createRoom()" class="btn btn-success">Stwórz</button>
-                    <button onclick="createRoomAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
-                </div>
-            </div>
-        </div>
 
-        <div id="roomSaveAlert" class="alert" style="display: none;">
-            <div class="alertDiv">
-                <label class="form-label" style="font-size: xx-large;">Nazwa pokoju do zapisania:</label><input class="form-control" type="text" id="">
-                <div style="display: flex;gap: 5vw;">
-                    <button onclick="" class="btn btn-primary">Zapisz pokój</button>
-                    <button onclick="roomSaveAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="roomSaveDeleteAllAlert" class="alert" style="display: none;">
-            <div class="alertDiv">
-                <h4>Czy jesteś pewny że chcesz usunąć wszystkie zapisane pokoje</h4>
-                <div style="display: flex;gap: 5vw;">
-                    <button onclick="romoveAllCokies()" class="btn btn-success">Usuń</button>
-                    <button onclick="roomSaveDeleteAllAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
-                </div>
-            </div>
-        </div>
-
-        <div id="roomSaveDeleteAlert" class="alert" style="display: none;">
-            <div class="alertDiv">
-                <h4>Czy jesteś pewny że chcesz usunąć pokój o nazwie xxxxxxxx</h4>
-                <div style="display: flex;gap: 5vw;">
-                    <button onclick="romoveCokie('nazwa-pokoju')" class="btn btn-success">Usuń</button>
-                    <button onclick="roomSaveDeleteAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
-                </div>
+    <div id="roomCreateAlert" class="alert" style="display: none;">
+        <div class="alertDiv">
+            <h4>Czy jesteś pewny że chcesz sworzyć nowy pokój</h4>
+            <div style="display: flex;gap: 5vw;">
+                <button onclick="createRoom()" class="btn btn-success">Stwórz</button>
+                <button onclick="createRoomAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
             </div>
         </div>
     </div>
+
+    <div id="roomSaveAlert" class="alert" style="display: none;">
+        <div class="alertDiv">
+            <label class="form-label" style="font-size: xx-large;">Nazwa pokoju do zapisania:</label><input class="form-control" type="text" id="saveRoomInput">
+            <div style="display: flex;gap: 5vw;">
+                <button onclick="saveRoom(document.getElementById('saveRoomInput').value)" class="btn btn-primary">Zapisz pokój</button>
+                <button onclick="roomSaveAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="roomDeleteAllAlert" class="alert" style="display: none;">
+        <div class="alertDiv">
+            <h4>Czy jesteś pewny że chcesz usunąć wszystkie zapisane pokoje</h4>
+            <div style="display: flex;gap: 5vw;">
+                <button onclick="romoveAllCokies()" class="btn btn-success">Usuń</button>
+                <button onclick="roomDeleteAllAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="roomLoadAlert" class="alert" style="display: none;">
+        <div class="alertDiv">
+            <h4>Czy jesteś pewny że chcesz wczytać pokój o nazwie<b id="roomLoadName"></b></h4>
+            <div style="display: flex;gap: 5vw;">
+                <button onclick="loadRoom(roomLoadName)" class="btn btn-success">Wczytaj</button>
+                <button onclick="roomLoadAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="roomDeleteAlert" class="alert" style="display: none;">
+        <div class="alertDiv">
+            <h4>Czy jesteś pewny że chcesz usunąć pokój o nazwie <b id="roomDeleteName"></b></h4>
+            <div style="display: flex;gap: 5vw;">
+                <button onclick="removeCookie(roomLoadName);roomDeleteAlert.style.display='none';roomLoadList();" class="btn btn-success">Usuń</button>
+                <button onclick="roomDeleteAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+            </div>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>

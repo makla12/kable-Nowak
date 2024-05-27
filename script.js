@@ -10,8 +10,9 @@ outletInfo = document.getElementById("outletInfo"),
 savedRoomsList = document.getElementById("savedRooms"),
 createRoomAlert = document.getElementById("roomCreateAlert"),
 roomSaveAlert = document.getElementById("roomSaveAlert"),
-roomSaveDeleteAllAlert = document.getElementById("roomSaveDeleteAllAlert"),
-roomSaveDeleteAlert = document.getElementById("roomSaveDeleteAlert");
+roomDeleteAllAlert = document.getElementById("roomDeleteAllAlert"),
+roomLoadAlert = document.getElementById("roomLoadAlert"),
+roomDeleteAlert = document.getElementById("roomDeleteAlert");
 
 let roomWidth = 1000,
 roomHeight = 500,
@@ -281,21 +282,15 @@ document.addEventListener("mouseover", e => {
                 if(data[1] * scale + 250 > roomWidth * scale){
                     outletInfo.style.left = data[1] * scale - 250 + "px";
                 }
-                outletInfo.style.top = roomHeight * scale - 115 + "px";
+                outletInfo.style.top = roomHeight * scale + 15 + "px";
                 break;
             case 1:
                 outletInfo.style.left = roomWidth * scale - 250 + "px";
                 outletInfo.style.top = data[1] * scale + 15 + "px";
-                if(data[1] * scale + 115 > roomHeight * scale){
-                    outletInfo.style.top = data[1] * scale - 115 + "px";
-                }
                 break;
             case 3:
                 outletInfo.style.left = 0;
                 outletInfo.style.top = data[1] * scale + 15 + "px";
-                if(data[1] * scale + 115 > roomHeight * scale){
-                    outletInfo.style.top = data[1] * scale - 115 + "px";
-                }
                 break;
         }
         document.getElementById("outletInfo1").innerHTML = data[3];
@@ -411,27 +406,34 @@ const romoveAllCokies = () => {
     for(let i of cookieList){
         removeCookie(i.trim().split("=")[0]);
     }
+    roomDeleteAllAlert.style.display='none';
+    roomLoadList();
 }
 
 const saveRoom = (x) => {
     let saveData = [roomWidth,roomHeight,items[0].length != 0,items];
     setCookie(x,saveData,365);
+    roomLoadList();
+    roomSaveAlert.style.display='none';
 }
 
 const roomLoadList = () => {
-    if(document.cookie != ''){
-        let cookieList = document.cookie.split(";");
+    if(document.cookie == ''){
         savedRoomsList.innerHTML = "";
-        let roomName;
-        for(let i of cookieList){
-            roomName = i.trim().split("=")[0];
-            savedRoomsList.innerHTML += `
-            <div style="display: flex;">
-                <h3 style="margin: 0 20px 0 0;">${roomName}</h3>
-                <button onclick="" class="btn btn-success" style="font-size: large;margin-right: 20px;">Wczytaj pokój</button>
-                <button onclick="" class="btn btn-danger" style="font-size: large;">Usuń pokój</button>
-            </div>`;
-        }
+        return 0;
+    }
+
+    let cookieList = document.cookie.split(";");
+    savedRoomsList.innerHTML = "";
+    let roomName;
+    for(let i of cookieList){
+        roomName = i.trim().split("=")[0];
+        savedRoomsList.innerHTML += `
+        <div style="display: flex;">
+            <h3 style="margin: 0 20px 0 0;">${roomName}</h3>
+            <button onclick="loadRoomAlert('${roomName}')" class="btn btn-success" style="font-size: large;margin-right: 20px;">Wczytaj pokój</button>
+            <button onclick="deleteRoomAlert('${roomName}')" class="btn btn-danger" style="font-size: large;">Usuń pokój</button>
+        </div>`;
     }
 }
 const loadRoom = (roomName) => {
@@ -445,27 +447,50 @@ const loadRoom = (roomName) => {
         }
     }
     loadData = loadData.split(",");
-    
-    roomWidth = loadData[0];
-    roomHeight = loadData[1];
+    roomWidth = Number(loadData.splice(0,1));
+    roomHeight = Number(loadData.splice(0,1));
 
     items = [];
-    if(loadData[2] == "true"){
+    if(loadData[0] == "true"){
         box.style.display = "block";
-        items.push(loadData.splice(3,6));
+        loadData.splice(0,1);
+        items.push(loadData.splice(0,6));
     }
     else{
         box.style.display = "none";
         items.push([]);
-        loadData.splice(3,1);
+        loadData.splice(0,2);
     }
 
-    while(loadData.length != 3){
-        items.push(loadData.splice(3,4));
+    while(loadData.length != 0){
+        items.push(loadData.splice(0,4));
     }
+
+    for(let i = 0; i < items[0].length;i++){
+        items[0][i] = Number(items[0][i]);
+    }
+
+    for(let i = 1; i < items.length;i++){
+        for(let j = 0; j < items[i].length - 1;j++){
+            items[i][j] = Number(items[i][j])
+        }
+    }
+
     updateScale(1);
+    calculateCable();
+    roomLoadAlert.style.display = "none";
 }
-
-
-
 roomLoadList();
+
+let roomLoadName;
+const loadRoomAlert = (x) => {
+    roomLoadName = x;
+    roomLoadAlert.style.display = "flex";
+    document.getElementById("roomLoadName").innerHTML = roomLoadName;
+}
+const deleteRoomAlert = (x) => {
+    roomLoadName = x;
+    roomDeleteAlert.style.display = "flex";
+    document.getElementById("roomDeleteName").innerHTML = roomLoadName;
+
+}
