@@ -111,18 +111,18 @@
         <div class="alertDiv">
             <h4>Czy jesteś pewny że chcesz usunąć wszystkie zapisane pokoje</h4>
             <div style="display: flex;gap: 5vw;">
-                <button onclick="romoveAllCokies()" class="btn btn-success">Usuń</button>
-                <button onclick="roomDeleteAllAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                <button onclick="romoveAllCokies()" class="btn btn-danger">Usuń</button>
+                <button onclick="roomDeleteAllAlert.style.display='none'" class="btn btn-primary">Anuluj</button>
             </div>
         </div>
     </div>
 
     <div id="roomLoadAlert" class="alert" style="display: none;">
         <div class="alertDiv">
-            <h4>Czy jesteś pewny że chcesz wczytać pokój o nazwie<b id="roomLoadName"></b></h4>
+            <h4>Czy jesteś pewny że chcesz wczytać pokój o nazwie <b id="roomLoadName"></b></h4>
             <div style="display: flex;gap: 5vw;">
                 <button onclick="loadRoom(roomLoadName)" class="btn btn-success">Wczytaj</button>
-                <button onclick="roomLoadAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                <button onclick="roomLoadAlert.style.display='none'" class="btn btn-primary">Anuluj</button>
             </div>
         </div>
     </div>
@@ -131,8 +131,8 @@
         <div class="alertDiv">
             <h4>Czy jesteś pewny że chcesz usunąć pokój o nazwie <b id="roomDeleteName"></b></h4>
             <div style="display: flex;gap: 5vw;">
-                <button onclick="removeCookie(roomLoadName);roomDeleteAlert.style.display='none';roomLoadList();" class="btn btn-success">Usuń</button>
-                <button onclick="roomDeleteAlert.style.display='none'" class="btn btn-danger">Anuluj</button>
+                <button onclick="removeCookie(roomLoadName);roomDeleteAlert.style.display='none';roomLoadList();" class="btn btn-danger">Usuń</button>
+                <button onclick="roomDeleteAlert.style.display='none'" class="btn btn-primary">Anuluj</button>
             </div>
         </div>
     </div>

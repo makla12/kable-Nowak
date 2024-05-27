@@ -282,15 +282,21 @@ document.addEventListener("mouseover", e => {
                 if(data[1] * scale + 250 > roomWidth * scale){
                     outletInfo.style.left = data[1] * scale - 250 + "px";
                 }
-                outletInfo.style.top = roomHeight * scale + 15 + "px";
+                outletInfo.style.top = roomHeight * scale - 115 + "px";
                 break;
             case 1:
                 outletInfo.style.left = roomWidth * scale - 250 + "px";
                 outletInfo.style.top = data[1] * scale + 15 + "px";
+                if(data[1] * scale + 115 > roomHeight * scale){
+                    outletInfo.style.top = data[1] * scale - 115 + "px";
+                }
                 break;
             case 3:
                 outletInfo.style.left = 0;
                 outletInfo.style.top = data[1] * scale + 15 + "px";
+                if(data[1] * scale + 115 > roomHeight * scale){
+                    outletInfo.style.top = data[1] * scale - 115 + "px";
+                }
                 break;
         }
         document.getElementById("outletInfo1").innerHTML = data[3];
@@ -476,8 +482,34 @@ const loadRoom = (roomName) => {
         }
     }
 
-    updateScale(1);
+    updateScale(scale);
     calculateCable();
+    outletEdit.style.display = "none";
+    document.getElementById("outletEditInfo").style.display = "block";
+    document.getElementById("deleteBtn").style.display = "none";
+    document.getElementById("roomDim").innerHTML = `${roomWidth/100}m x ${roomHeight/100}m`
+    switch(items[0][0]){
+        case 0:
+            document.getElementById("BoxX").value = items[0][1] / 100;
+            document.getElementById("BoxY").value = items[0][2] / 100;
+            break;
+        case 2:
+            document.getElementById("BoxX").value = items[0][1] / 100;
+            document.getElementById("BoxY").value = (roomHeight - items[0][2] - items[0][5]) / 100;
+            break;
+        case 1:
+            document.getElementById("BoxX").value = (roomWidth - items[0][2] - items[0][4]) / 100;
+            document.getElementById("BoxY").value = items[0][1] / 100;
+            break;
+        case 3:
+            document.getElementById("BoxX").value = items[0][2] / 100;
+            document.getElementById("BoxY").value = items[0][1] / 100;
+            break;
+    }
+
+    document.getElementById("BoxH").value = items[0][3] / 100;
+    document.getElementById("BoxWidth").value = items[0][4] / 100;
+    document.getElementById("BoxLength").value = items[0][5] / 100;
     roomLoadAlert.style.display = "none";
 }
 roomLoadList();
