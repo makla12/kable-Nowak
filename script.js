@@ -417,6 +417,10 @@ const romoveAllCokies = () => {
 }
 
 const saveRoom = (x) => {
+    if(x == null || x == ""){
+        alert("Zostały wprowadzone złe dane");
+        return 0;
+    }
     let saveData = [roomWidth,roomHeight,items[0].length != 0,items];
     setCookie(x,saveData,365);
     roomLoadList();
