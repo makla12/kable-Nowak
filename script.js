@@ -79,7 +79,7 @@ const updateScale = (x) => {
 const createOutlet = () => {
     items.push([]);
     roomOutlets.innerHTML += `<div onclick="selectOutlet(${items.length - 1})" id="outlet${items.length - 1}" class="outlet"></div>`;
-    items[items.length - 1][0] = 0;
+    items[items.length - 1][0] = document.getElementById("outletI").value;
     items[items.length - 1][1] = 0;
     items[items.length - 1][2] = 100;
     items[items.length - 1][3] = `Gniazdko ${items.length - 1}`;
@@ -380,7 +380,7 @@ const calculateDist = (coords) => {
             }
             break;
     }
-    return dist + boxCoords[2] + Math.abs(coords[2] - boxCoords[3]);
+    return Math.round(dist + boxCoords[2] + Math.abs(coords[2] - boxCoords[3]),2);
 };
 
 const calculateCable = () => {
